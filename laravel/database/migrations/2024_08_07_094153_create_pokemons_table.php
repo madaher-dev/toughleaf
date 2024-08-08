@@ -18,6 +18,7 @@ class CreatePokemonsTable extends Migration
             $table->string('species')->nullable();
             $table->string('type')->nullable();
             $table->text('notes')->nullable();
+            $table->boolean('active')->default(true);
         });
     }
 

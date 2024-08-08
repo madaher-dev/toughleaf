@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pokemons; 
-
+use App\Models\Pokemons;
 
 class PokemonController extends Controller
 {
     public function index()
     {
-        $pokemons = Pokemons::all();
+        // Sort Pokémons by their 'id' in ascending order
+        $pokemons = Pokemons::orderBy('id', 'asc')->get();
         return view('pokemons.index', compact('pokemons'));
     }
 }

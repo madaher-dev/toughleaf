@@ -9,7 +9,7 @@
     <h1>Pokemon List</h1>
     <ul>
         @foreach ($pokemons as $pokemon)
-            <li>{{ $pokemon->number }} - {{ $pokemon->name }} -  {{ $pokemon->image }} -  {{ $pokemon->first_game }} -  {{ $pokemon->designed_by }} - {{ $pokemon->species }} -  {{ $pokemon->type }} -  {{ $pokemon->notes }}  
+            <li>{{ $pokemon->number }} - {{ $pokemon->number }} - {{ $pokemon->name }} -  {{ $pokemon->image }} -  {{ $pokemon->first_game }} -  {{ $pokemon->designed_by }} - {{ $pokemon->species }} -  {{ $pokemon->type }} -  {{ $pokemon->notes }}  
             </li>
         @endforeach
     </ul>

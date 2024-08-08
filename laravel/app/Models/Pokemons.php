@@ -10,7 +10,7 @@ class Pokemons extends Model
     use HasFactory;
 
     protected $fillable = [
-        'number', 'name', 'image', 'first_game', 'designed_by', 'species', 'type', 'notes'
+        'number', 'name', 'image', 'first_game', 'designed_by', 'species', 'type', 'notes', 'active'
     ];
 
     public $timestamps = false;
