@@ -20,25 +20,40 @@ class PokemonsTableSeeder extends Seeder
         $html = $response->getBody()->getContents();
 
         $crawler = new Crawler($html);
+
         $crawler->filter('.wikitable.sortable.plainrowheaders tr')->each(function (Crawler $node, $i) {
             if ($i == 0) return; // Skip the header row
 
-            $nameNode = $node->filter('th')->first();
-            $numberNode = $nameNode->filter('a')->last();
+            $id = $node->attr('id'); // Extract the name directly from the row's ID attribute
+            $cells = $node->filter('td, th')->each(function (Crawler $cellNode) {
+                return $cellNode->text();
+            });
 
-            if ($nameNode->count() && $numberNode->count()) {
-                // Extract English name
-                $nameParts = explode('<br>', $nameNode->html());
-                $name = strip_tags($nameParts[0]);
-
-                // Extract number and remove brackets
-                $number = trim($numberNode->text(), '()');
-
-                Pokemons::create([
-                    'number' => $number,
-                    'name' => $name,
-                ]);
+            if (!isset($id) || empty($id)) {
+                return; // Skip rows without a proper ID
             }
+
+            $name = ucfirst($id); // Capitalize the first letter to standardize the name format
+
+            // Extract number from the first link in the row, if it exists
+            $number = $node->filter('th a')->last()->text();
+            $number = preg_replace('/[^0-9]/', '', $number); // Ensure it's only digits
+
+            // Type might be in different cells depending on the table structure
+            $type = isset($cells[2]) ? $cells[2] : 'Unknown';
+
+            // Notes are typically in the last cell
+            $notes = end($cells);
+
+            // Save to the database
+            Pokemons::create([
+                'number' => $number,
+                'name' => $name,
+                'type' => $type,
+                'notes' => $notes,
+            ]);
+
+         
         });
 
         $this->command->info('Pokemons table seeded!');

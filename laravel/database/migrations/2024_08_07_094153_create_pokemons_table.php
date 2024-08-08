@@ -8,13 +8,17 @@ class CreatePokemonsTable extends Migration
 {
     public function up()
     {
-
-Schema::create('pokemons', function (Blueprint $table) {
-    $table->id();
-    $table->string('number');
-    $table->string('name');
-});
-
+        Schema::create('pokemons', function (Blueprint $table) {
+            $table->id();
+            $table->string('number');
+            $table->string('name');
+            $table->string('image')->nullable();
+            $table->string('first_game')->nullable();
+            $table->string('designed_by')->nullable();
+            $table->string('species')->nullable();
+            $table->string('type')->nullable();
+            $table->text('notes')->nullable();
+        });
     }
 
     public function down()
