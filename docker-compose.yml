@@ -1,16 +1,11 @@
-version: "3.8"
+version: "2.7"
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     container_name: laravel_app
-    working_dir: /var/www
     volumes:
-      - .:/var/www
-    expose:
-      - "9000"
+      - ./laravel:/var/www
     networks:
       - app-network
 
@@ -21,7 +16,7 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - .:/var/www
+      - ./laravel:/var/www:ro
       - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - app
@@ -39,7 +34,7 @@ services:
     volumes:
       - dbdata:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - "5434:5432" # Change from 5432 to 5434 on the host
     networks:
       - app-network
 
@@ -49,4 +44,3 @@ networks:
 
 volumes:
   dbdata:
-    driver: local
