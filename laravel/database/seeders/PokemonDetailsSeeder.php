@@ -44,7 +44,7 @@ class PokemonDetailsSeeder extends Seeder
                             'first_game' => $details['first_game'],
                             'designed_by' => $details['designed_by'],
                             'species' => $details['species'],
-                            'type' => $details['type'],
+                    
                         ]);
                     }
                 }
@@ -71,7 +71,6 @@ class PokemonDetailsSeeder extends Seeder
             'first_game' => $crawler->filter('.infobox .infobox-label:contains("First game") + .infobox-data')->count() ? $crawler->filter('.infobox .infobox-label:contains("First game") + .infobox-data')->text() : null,
             'designed_by' => $crawler->filter('.infobox .infobox-label:contains("Designed by") + .infobox-data')->count() ? $crawler->filter('.infobox .infobox-label:contains("Designed by") + .infobox-data')->text() : null,
             'species' => $crawler->filter('.infobox .infobox-label:contains("Species") + .infobox-data')->count() ? $crawler->filter('.infobox .infobox-label:contains("Species") + .infobox-data')->text() : null,
-            'type' => $crawler->filter('.infobox .infobox-label:contains("Type") + .infobox-data')->count() ? $crawler->filter('.infobox .infobox-label:contains("Type") + .infobox-data')->text() : null,
         ];
     }
 }

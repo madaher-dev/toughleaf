@@ -40,6 +40,11 @@ class PokemonApiController extends Controller
         $pokemon = Pokemons::findOrFail($id);
         return response()->json($pokemon);
     }
+    public function showName($name)
+    {
+        $pokemon = Pokemons::where('name', $name)->firstOrFail();
+        return response()->json($pokemon);
+    }
 
     public function store(Request $request)
     {

@@ -6,8 +6,13 @@ use App\Http\Controllers\Api\PokemonApiController;
 // API route to list all Pokemons
 Route::get('/pokemons', [PokemonApiController::class, 'index'])->name('api.pokemons.index');
 
+// API route to get a single Pokemon by name
+Route::get('/pokemons/name/{name}', [PokemonApiController::class, 'showName'])->name('api.pokemons.showName');
+
 // API route to get a single Pokemon by ID
 Route::get('/pokemons/{id}', [PokemonApiController::class, 'show'])->name('api.pokemons.show');
+
+
 
 // API route to create a new Pokemon
 Route::post('/pokemons', [PokemonApiController::class, 'store'])->name('api.pokemons.store');
